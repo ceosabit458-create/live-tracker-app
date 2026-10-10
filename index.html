@@ -3,25 +3,75 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Live Security Sharing</title>
+  <title>Secure Live Sharing</title>
   <style>
-    body { font-family: sans-serif; background: #0f172a; color: white; text-align: center; margin: 0; padding: 20px; }
-    .header-bar { position: fixed; top: 12px; right: 15px; display: flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, 0.1); padding: 6px 14px; border-radius: 20px; cursor: pointer; }
-    .red-dot { width: 10px; height: 10px; background-color: #ef4444; border-radius: 50%; box-shadow: 0 0 8px #ef4444; animation: pulse 1.5s infinite; }
-    @keyframes pulse { 0% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(1.2); } 100% { opacity: 1; transform: scale(1); } }
-    .modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #1e293b; padding: 20px; border-radius: 12px; border: 1px solid #334155; }
-    .btn-stop { background: #ef4444; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; margin-top: 10px; font-weight: bold; }
+    body { 
+      font-family: sans-serif; 
+      background: #0f172a; 
+      color: white; 
+      text-align: center; 
+      margin: 0; 
+      padding: 20px;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    .header-bar { 
+      position: fixed; 
+      top: 12px; 
+      right: 15px; 
+      display: flex; 
+      align-items: center; 
+      gap: 8px; 
+      background: rgba(255, 255, 255, 0.1); 
+      padding: 6px 14px; 
+      border-radius: 20px; 
+      cursor: pointer; 
+    }
+    .red-dot { 
+      width: 10px; 
+      height: 10px; 
+      background-color: #ef4444; 
+      border-radius: 50%; 
+      box-shadow: 0 0 8px #ef4444; 
+      animation: pulse 1.5s infinite; 
+    }
+    @keyframes pulse { 
+      0% { opacity: 1; transform: scale(1); } 
+      50% { opacity: 0.4; transform: scale(1.2); } 
+      100% { opacity: 1; transform: scale(1); } 
+    }
+    .modal { 
+      display: none; 
+      position: fixed; 
+      top: 50%; 
+      left: 50%; 
+      transform: translate(-50%, -50%); 
+      background: #1e293b; 
+      padding: 20px; 
+      border-radius: 12px; 
+      border: 1px solid #334155; 
+    }
+    .btn-stop { 
+      background: #ef4444; 
+      color: white; 
+      border: none; 
+      padding: 10px 20px; 
+      border-radius: 6px; 
+      cursor: pointer; 
+      margin-top: 10px; 
+      font-weight: bold; 
+    }
   </style>
 </head>
 <body>
 
   <div class="header-bar" onclick="toggleModal()">
     <div class="red-dot"></div>
-    <span style="font-size: 12px; color: #cbd5e1;">Live Active</span>
+    <span style="font-size: 12px; color: #cbd5e1;">Live Secure</span>
   </div>
 
-  <h2>Location / Media Sharing</h2>
-  <p id="status">Waiting for user permission...</p>
+  <h2>Protected Live Sharing</h2>
+  <p id="status">Secure connection established...</p>
 
   <div id="controlModal" class="modal">
     <p style="margin: 0 0 10px 0;">Sharing with Friend</p>
@@ -34,7 +84,7 @@
       m.style.display = m.style.display === 'block' ? 'none' : 'block';
     }
     function stopSharing() {
-      document.body.innerHTML = "<h2 style='color:#ef4444; margin-top:80px;'>Sharing Stopped by User</h2>";
+      document.body.innerHTML = "<h2 style='color:#ef4444; margin-top:80px;'>Sharing Stopped & Disconnected</h2>";
     }
   </script>
 </body>
