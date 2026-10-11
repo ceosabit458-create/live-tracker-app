@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Secure Live Sharing</title>
+  <title>Secure Live Sharing & Tracking</title>
   <style>
     body { 
       font-family: sans-serif; 
@@ -40,6 +40,13 @@
       50% { opacity: 0.4; transform: scale(1.2); } 
       100% { opacity: 1; transform: scale(1); } 
     }
+    .badge-free {
+      background: #3b82f6;
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 10px;
+      margin-left: 4px;
+    }
     .modal { 
       display: none; 
       position: fixed; 
@@ -50,6 +57,8 @@
       padding: 20px; 
       border-radius: 12px; 
       border: 1px solid #334155; 
+      width: 80%;
+      max-width: 300px;
     }
     .btn-stop { 
       background: #ef4444; 
@@ -58,34 +67,72 @@
       padding: 10px 20px; 
       border-radius: 6px; 
       cursor: pointer; 
-      margin-top: 10px; 
+      margin-top: 15px; 
       font-weight: bold; 
+      width: 100%;
+    }
+    .info-box {
+      background: #334155;
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 15px;
+      font-size: 13px;
+      color: #94a3b8;
     }
   </style>
 </head>
 <body>
 
+  <!-- Top Header with Red Dot -->
   <div class="header-bar" onclick="toggleModal()">
     <div class="red-dot"></div>
     <span style="font-size: 12px; color: #cbd5e1;">Live Secure</span>
+    <span class="badge-free" id="userPlan">FREE</span>
   </div>
 
   <h2>Protected Live Sharing</h2>
   <p id="status">Secure connection established...</p>
 
+  <div class="info-box" id="featureNotice">
+    Standard Quality Streaming (SD) Active
+  </div>
+
+  <!-- Disconnect & Control Modal -->
   <div id="controlModal" class="modal">
-    <p style="margin: 0 0 10px 0;">Sharing with Friend</p>
+    <p style="margin: 0 0 10px 0; font-weight: bold;">Session Control</p>
+    <span style="font-size: 12px; color: #94a3b8;">Connected with Friend</span>
     <button class="btn-stop" onclick="stopSharing()">Disconnect / Stop</button>
   </div>
 
   <script>
+    // System Configurations for Free/Pro Modes
+    const APP_CONFIG = {
+      isPremium: false, // প্রিমিয়াম চালু করতে হলে পরবর্তীতে এটি true করে দেবেন
+      sessionLimitMinutes: 10,
+      streamQuality: 'SD'
+    };
+
+    function initSession() {
+      if(!APP_CONFIG.isPremium) {
+        console.log("Free Mode active: Standard limits applied.");
+      } else {
+        document.getElementById('userPlan').innerText = "PRO";
+        document.getElementById('userPlan').style.background = "#eab308";
+        document.getElementById('featureNotice').innerText = "HD Quality Streaming & Auto-Cloud Backup Active";
+      }
+    }
+
     function toggleModal() {
       const m = document.getElementById('controlModal');
       m.style.display = m.style.display === 'block' ? 'none' : 'block';
     }
+
     function stopSharing() {
       document.body.innerHTML = "<h2 style='color:#ef4444; margin-top:80px;'>Sharing Stopped & Disconnected</h2>";
     }
+
+    // Initialize Page
+    initSession();
   </script>
 </body>
 </html>
