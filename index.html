@@ -551,6 +551,39 @@
             if(!link) return;
             window.location.href = `https://api.whatsapp.com/send?text=${encodeURIComponent("SEEKRO Secure Safety Link: " + link)}`;
         }
+      // Dynamic Secure Link Generator
+function generateSecureGPSLink() {
+    const uniqueSessionId = 'seekro_' + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    const encryptionKey = 'SEEKRO_SECURE_E2EE_KEY_' + uniqueSessionId;
+    const baseUrl = 'https://ceosabit458-create.github.io/live-tracker-app/track.html';
+    const secureShareableLink = `${baseUrl}?session=${uniqueSessionId}&key=${btoa(encryptionKey)}`;
+
+    if (navigator.share) {
+        navigator.share({
+            title: 'SEEKRO Family Safety - Live Location Request',
+            text: 'Joruri safety tracking link. Amar live location dekhte nicher link-e probesh korun ebong permission din:',
+            url: secureShareableLink,
+        })
+        .catch((error) => console.log('Error sharing:', error));
+    } else {
+        navigator.clipboard.writeText(secureShareableLink);
+        alert('Secure tracking link copy hoye geche! Jake pathate chan take paste kore din:\n\n' + secureShareableLink);
+    }
+}
+
+// Button event listener
+document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('button, a');
+    buttons.forEach(btn => {
+        if (btn.innerText.includes('Share Secure HTTPS GPS Link')) {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                generateSecureGPSLink();
+            });
+        }
+    });
+});
+                                
     </script>
 </body>
 </html>
